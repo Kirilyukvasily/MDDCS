@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">MDDCS</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_main2">Расчет</string>
+    <string name="title_activity_main22">Результат</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="Nach_ysl_item">Начальные условия</string>
+    <string name="Charac_item">Характеристики</string>
+    <string name="Seria_item">Серия</string>
+    <string name="Zagalovok_item">Заголовок</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <string name="tab1">Время</string>
+    <string name="tab2">Ср. кинетическая энергия</string>
+    <string name="tab3">Радиюс</string>
+    <string name="tab4">Ср.скорость</string>
+    <string name="chek">Вычисление серии зон сдвига</string>
+
+    <string name="tab5">Начальные условия</string>
+    <string name="tab6">Характеристики</string>
+    <string name="tab7">Серия</string>
+    <string name="tab8">Заголовок</string>
+    <string name="title_activity_bd">Ранее использованные параметры</string>
+    <string name="Результат">Результат</string>
+
+
+</resources>

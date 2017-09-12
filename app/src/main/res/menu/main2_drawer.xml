@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nach"
+            android:title="@string/Nach_ysl_item" />
+        <item
+            android:id="@+id/charact"
+            android:title="@string/Charac_item" />
+        <item
+            android:id="@+id/seria"
+            android:title="@string/Seria_item" />
+        <item
+            android:id="@+id/zagol"
+            android:title="@string/Zagalovok_item" />
+    </group>
+</menu>

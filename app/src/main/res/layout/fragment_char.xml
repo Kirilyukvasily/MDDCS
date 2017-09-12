@@ -1,0 +1,302 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/scrollView">
+
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ru.dip.ddcs.fragments.FragmentChar">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+        <EditText
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:id="@+id/editText9"
+        android:numeric="decimal"
+        android:text="0.5"
+        android:layout_below="@+id/editText16"
+        android:layout_alignLeft="@+id/editText16"
+        android:layout_alignStart="@+id/editText16" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Рs"
+        android:id="@+id/textView15"
+        android:layout_below="@+id/textView8"
+        android:layout_alignLeft="@+id/textView8"
+        android:layout_alignStart="@+id/textView8"
+        android:layout_marginTop="16dp" />
+
+    <EditText
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:id="@+id/editText10"
+        android:numeric="decimal"
+        android:text="0.33333333333"
+        android:layout_below="@+id/editText9"
+        android:layout_alignLeft="@+id/editText9"
+        android:layout_alignStart="@+id/editText9" />
+
+    <EditText
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:id="@+id/editText11"
+        android:numeric="decimal"
+        android:text="0.35"
+        android:layout_below="@+id/editText12"
+        android:layout_alignLeft="@+id/editText12"
+        android:layout_alignStart="@+id/editText12" />
+
+    <EditText
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:id="@+id/editText12"
+        android:numeric="decimal"
+        android:text="0.5"
+        android:layout_below="@+id/editText10"
+        android:layout_alignLeft="@+id/editText10"
+        android:layout_alignStart="@+id/editText10" />
+
+    <EditText
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:id="@+id/editText13"
+        android:numeric="decimal"
+        android:text="2.56"
+        android:layout_below="@+id/editText19"
+        android:layout_alignLeft="@+id/editText19"
+        android:layout_alignStart="@+id/editText19" />
+
+    <EditText
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:id="@+id/editText14"
+        android:numeric="decimal"
+        android:text="8934.82295482295"
+        android:layout_below="@+id/editText24"
+        android:layout_alignLeft="@+id/editText17"
+        android:layout_alignStart="@+id/editText17" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Т,К"
+        android:id="@+id/textView20"
+        android:layout_alignBottom="@+id/editText24"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+        <EditText
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:id="@+id/editText17"
+        android:numeric="decimal"
+        android:text="1000000000000"
+        android:layout_below="@+id/editText14"
+        android:layout_alignLeft="@+id/editText24"
+        android:layout_alignStart="@+id/editText24" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="ro,м2"
+        android:id="@+id/textView22"
+        android:layout_below="@+id/textView11"
+        android:layout_alignLeft="@+id/textView11"
+        android:layout_alignStart="@+id/textView11"
+        android:layout_marginTop="19dp" />
+
+    <EditText
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:id="@+id/editText18"
+        android:numeric="decimal"
+        android:text="55657777777.7778"
+        android:layout_below="@+id/editText17"
+        android:layout_alignLeft="@+id/editText17"
+        android:layout_alignStart="@+id/editText17" />
+
+        <EditText
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:id="@+id/editText19"
+        android:numeric="decimal"
+        android:text="0.000021"
+        android:layout_below="@+id/editText18"
+        android:layout_alignLeft="@+id/editText18"
+        android:layout_alignStart="@+id/editText18" />
+
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Номера дислокаций:"
+        android:id="@+id/textView25"
+        android:textStyle="bold"
+        android:layout_alignBottom="@+id/editText20"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:id="@+id/editText20"
+        android:text="1,2,3"
+        android:layout_below="@+id/editText15"
+        android:layout_alignRight="@+id/editText15"
+        android:layout_alignEnd="@+id/editText15"
+        android:singleLine="false"
+        android:fontFamily="sans-serif"
+        android:layout_toRightOf="@+id/textView25"
+        android:layout_toEndOf="@+id/textView25" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Введите номера и/или диапазон дислокаций. Пр:1,2,3-12"
+        android:id="@+id/textView26"
+        android:layout_below="@+id/textView25"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+        <EditText
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:id="@+id/editText15"
+        android:numeric="decimal"
+        android:text="0.5"
+        android:layout_below="@+id/editText11"
+        android:layout_alignLeft="@+id/editText11"
+        android:layout_alignStart="@+id/editText11" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="ξ"
+        android:id="@+id/textView19"
+        android:layout_alignBaseline="@+id/editText12"
+        android:layout_alignBottom="@+id/editText12"
+        android:layout_alignLeft="@+id/textView15"
+        android:layout_alignStart="@+id/textView15" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="d,кг/м"
+            android:id="@+id/textView11"
+            android:layout_alignBaseline="@+id/editText14"
+            android:layout_alignBottom="@+id/editText14"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="G,Па"
+            android:id="@+id/textView23"
+            android:layout_alignBaseline="@+id/editText18"
+            android:layout_alignBottom="@+id/editText18"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="В,Па с"
+            android:id="@+id/textView24"
+            android:layout_alignBaseline="@+id/editText19"
+            android:layout_alignBottom="@+id/editText19"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="b,Å"
+            android:id="@+id/textView14"
+            android:layout_alignBaseline="@+id/editText13"
+            android:layout_alignBottom="@+id/editText13"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="τf,МПа"
+            android:id="@+id/textView21"
+            android:layout_alignBaseline="@+id/editText16"
+            android:layout_alignBottom="@+id/editText16"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Pj"
+            android:id="@+id/textView8"
+            android:layout_alignBaseline="@+id/editText9"
+            android:layout_alignBottom="@+id/editText9"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="v"
+            android:id="@+id/textView16"
+            android:layout_alignBaseline="@+id/editText11"
+            android:layout_alignBottom="@+id/editText11"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="α"
+        android:id="@+id/textView17"
+            android:layout_alignBaseline="@+id/editText15"
+            android:layout_alignBottom="@+id/editText15"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:id="@+id/editText16"
+        android:numeric="decimal"
+        android:text="1"
+            android:layout_below="@+id/editText13"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <EditText
+            android:layout_width="280dp"
+            android:layout_height="40dp"
+            android:id="@+id/editText24"
+            android:numeric="decimal"
+            android:text="293"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+
+    </RelativeLayout>
+</ScrollView>
