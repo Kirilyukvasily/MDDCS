@@ -45,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intObj = new Intent(this, Server.class);
         startActivity(intObj);
     }
+    public void newScreen5 (View v) {
+        Intent intObj = new Intent(this, WorkServer.class);
+        startActivity(intObj);
+    }
 
 
     @Override
