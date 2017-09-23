@@ -34,11 +34,9 @@
             android:name=".BDActivity"
             android:label="@string/title_activity_bd"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Server" />
         <activity
-            android:name=".WorkServer"
-            android:label="@string/title_activity_work_server"
-            android:theme="@style/AppTheme"></activity>
+            android:name=".Calculation"
+            android:label="@string/title_activity_colculation"
+            android:theme="@style/AppTheme" />
     </application>
-
 </manifest>

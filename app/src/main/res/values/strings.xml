@@ -25,6 +25,7 @@
     <string name="title_activity_bd">Ранее использованные параметры</string>
     <string name="Результат">Результат</string>
     <string name="title_activity_work_server">WorkServer</string>
+    <string name="title_activity_colculation">Colculation</string>
 
 
 </resources>

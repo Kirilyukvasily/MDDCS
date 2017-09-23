@@ -3,7 +3,8 @@ package ru.dip.ddcs;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Colculation extends AppCompatActivity {
+
+public class Calculation extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

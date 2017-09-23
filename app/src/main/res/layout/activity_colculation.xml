@@ -9,14 +9,14 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="ru.dip.ddcs.MainActivity">
+    tools:context="ru.dip.ddcs.Calculation">
 
     <Button
         android:layout_width="250dp"
         android:layout_height="80dp"
-        android:text="Расчет"
-        android:id="@+id/button"
-        android:onClick="newScreen4"
+        android:text="Сщздать задачу"
+        android:id="@+id/button4"
+        android:onClick="newScreen3"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         tools:onClick="newScreen4" />
@@ -24,11 +24,12 @@
     <Button
         android:layout_width="250dp"
         android:layout_height="80dp"
-        android:text="Результат"
-        android:id="@+id/button2"
-        android:onClick="newScreen2"
-        android:layout_below="@+id/button"
-        android:layout_alignLeft="@+id/button"
-        android:layout_alignStart="@+id/button" />
+        android:text="Пулучить задачу с сервера"
+        android:id="@+id/button7"
+        android:onClick="newScreen"
+        android:layout_marginTop="28dp"
+        android:layout_below="@+id/button4"
+        android:layout_alignLeft="@+id/button4"
+        android:layout_alignStart="@+id/button4" />
 
 </RelativeLayout>

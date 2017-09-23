@@ -8,7 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import static ru.dip.ddcs.R.id.activity_server;
+
 
 public class MainActivity extends AppCompatActivity {
     final String LOG_TAG = "myLogs";
@@ -42,13 +42,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intObj);
     }
     public void newScreen4 (View v) {
-        Intent intObj = new Intent(this, Server.class);
+        Intent intObj = new Intent(this, Calculation.class);
         startActivity(intObj);
     }
-    public void newScreen5 (View v) {
-        Intent intObj = new Intent(this, WorkServer.class);
-        startActivity(intObj);
-    }
+
 
 
     @Override
