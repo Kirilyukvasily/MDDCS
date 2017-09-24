@@ -26,6 +26,7 @@
     <string name="Результат">Результат</string>
     <string name="title_activity_work_server">WorkServer</string>
     <string name="title_activity_colculation">Colculation</string>
+    <string name="title_activity_server_settings">ServerSettings</string>
 
 
 </resources>

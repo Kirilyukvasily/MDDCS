@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intObj);
     }
     public void newScreen4 (View v) {
-        Intent intObj = new Intent(this, Calculation.class);
+        Intent intObj = new Intent(this, Colculation.class);
         startActivity(intObj);
     }
 
