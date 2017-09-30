@@ -6,8 +6,15 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class ServerSettings extends AppCompatActivity {
+
+    String[] proc = {"1", "2", "3", "4", "5","6", "7", "8", "9", "10" };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,6 +23,27 @@ public class ServerSettings extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-    }
+        TextView TextInfo = (TextView) findViewById(R.id.textView27);
+        TextInfo.setText("максимально - " + Runtime.getRuntime().availableProcessors());
+
+        // адаптер
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, proc);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        spinner.setAdapter(adapter);
+        // устанавливаем обработчик нажатия
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                // показываем позиция нажатого элемента
+                Toast.makeText(getBaseContext(), "Position = " + position, Toast.LENGTH_SHORT).show();
+        }
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) { }
+        }
+        );
 
 }
+
+}
+
