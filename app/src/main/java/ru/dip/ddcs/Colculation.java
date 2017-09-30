@@ -19,25 +19,35 @@ public class Colculation extends AppCompatActivity {
 
 
     }
+
     public void newScreen(View v) {
 
         Intent intObj = new Intent(this, Main2Activity.class);
         startActivity(intObj);
     }
+
     public void newScreen2(View v) {
         Intent intObj = new Intent(this, Main22Activity.class);
         startActivity(intObj);
     }
-    public void newScreen3 (View v) {
+
+    public void newScreen3(View v) {
         Intent intObj = new Intent(this, BDActivity.class);
         startActivity(intObj);
     }
-    public void newScreen4 (View v) {
+
+    public void newScreen4(View v) {
         Intent intObj = new Intent(this, Colculation.class);
         startActivity(intObj);
     }
-    public void newScreen5 (View v) {
+
+    public void newScreen5(View v) {
         Intent intObj = new Intent(this, ServerSettings.class);
+        startActivity(intObj);
+    }
+
+    public void newScreen6(View v) {
+        Intent intObj = new Intent(this, ConnectionServer.class);
         startActivity(intObj);
     }
 }

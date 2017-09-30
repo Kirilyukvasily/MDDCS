@@ -18,8 +18,8 @@
         android:layout_width="250dp"
         android:layout_height="80dp"
         android:id="@+id/button5"
-        android:onClick="newScreen5"
-        tools:onClick="newScreen5"
+        android:onClick="newScreen6"
+        tools:onClick="newScreen6"
         android:layout_below="@+id/button6"
         android:layout_alignLeft="@+id/button6"
         android:layout_alignStart="@+id/button6" />
@@ -31,8 +31,8 @@
         android:id="@+id/button6"
         android:onClick="newScreen3"
         tools:onClick="newScreen3"
-        android:layout_marginRight="35dp"
-        android:layout_marginEnd="35dp"
+        android:layout_marginRight="37dp"
+        android:layout_marginEnd="37dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />

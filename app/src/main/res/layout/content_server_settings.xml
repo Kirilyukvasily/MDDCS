@@ -13,72 +13,12 @@
     tools:context="ru.dip.ddcs.ServerSettings"
     tools:showIn="@layout/activity_server_settings">
 
-    <Button
-        android:text="Расчет"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="194dp"
-        android:id="@+id/button7"
-        android:layout_below="@+id/editText21"
-        android:layout_centerHorizontal="true" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Введите Port"
-        android:ems="10"
-        android:id="@+id/editText21"
-        android:layout_below="@+id/editText5"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:text="Выберите количество ядер"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editText21"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/textView18" />
-
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner"
-        android:layout_below="@+id/textView18"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:id="@+id/textView27"
-        android:layout_below="@+id/editText21"
-        android:layout_toRightOf="@+id/textView18"
-        android:layout_toEndOf="@+id/textView18" />
-
     <Switch
         android:text="На низком уровне батареи"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="23dp"
         android:id="@+id/switch3"
-        android:layout_below="@+id/switch2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Введите IP"
-        android:ems="10"
-        android:id="@+id/editText5"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/switch1"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -91,12 +31,48 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="13dp"
+        android:layout_marginStart="13dp"
+        android:id="@+id/textView27"
+        android:layout_above="@+id/spinner"
+        android:layout_toRightOf="@+id/textView18"
+        android:layout_toEndOf="@+id/textView18" />
+
+    <TextView
+        android:text="Выберите количество ядер"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView18"
+        android:layout_below="@+id/editText5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner"
+        android:layout_below="@+id/textView18"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Расчет"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="37dp"
+        android:id="@+id/button7"
+        android:layout_below="@+id/switch3"
+        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent" />
+
     <Switch
         android:text="Только по Wi-Fi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/switch2"
-        android:layout_marginTop="11dp"
         android:layout_below="@+id/spinner"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />

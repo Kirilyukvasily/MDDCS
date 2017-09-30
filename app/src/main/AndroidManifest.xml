@@ -36,23 +36,17 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".Colculation"
-            android:label="@string/title_activity_colculation"
-            android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:label="Расчет"
+            android:theme="@style/AppTheme"></activity>
         <activity
             android:name=".ServerSettings"
-            android:label="@string/title_activity_server_settings"
+            android:label="Настройки"
+            android:theme="@style/AppTheme"></activity>
+        <activity
+            android:name=".ConnectionServer"
+            android:label="Подключение к серверу"
             android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
