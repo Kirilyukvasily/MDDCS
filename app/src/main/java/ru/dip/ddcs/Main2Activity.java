@@ -3,6 +3,7 @@ package ru.dip.ddcs;
 import android.app.Application;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -52,13 +54,39 @@ public class Main2Activity extends ActionBarActivity {
         setSupportActionBar(toolbar);
 
 
+
+
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             String out = "Конец расчета";
 
+
+
             @Override
             public void onClick(View view) {
-                try {
+                try{
+
+                    Run();
+                }catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Main2Activity.this);
+                    builder.setTitle("Расчет завершен")
+                            .setCancelable(false)
+                            .setNegativeButton("ОК",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                        }
+                                    });
+
+                    AlertDialog alert = builder.create();
+                    alert.show();
+
+
+
+                /*try {
 
                     Run();
                 } catch (IOException e) {
@@ -66,7 +94,7 @@ public class Main2Activity extends ActionBarActivity {
                     out = "Расчет не выполнен";
                 }
                 Snackbar.make(view, out, Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                        .setAction("Action", null).show();*/
             }
 
 

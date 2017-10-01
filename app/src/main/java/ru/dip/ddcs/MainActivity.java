@@ -7,7 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
+import android.widget.ImageView;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
 
         // создаем объект для создания и управления версиями БД
         //dbHelper = new DBHelper(this);
+
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
