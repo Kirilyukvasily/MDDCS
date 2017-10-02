@@ -1,33 +1,26 @@
 package ru.dip.ddcs;
-import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.net.wifi.ScanResult;
-import android.net.wifi.WifiConfiguration;
-import android.net.wifi.WifiConfiguration.KeyMgmt;
 import android.net.wifi.WifiManager;
-import android.content.Context;
-import android.net.wifi.WifiConfiguration;
-import android.net.wifi.WifiManager;
+import android.os.BatteryManager;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
+import android.content.BroadcastReceiver;
+import static android.os.BatteryManager.BATTERY_PLUGGED_AC;
+import static android.os.BatteryManager.BATTERY_PLUGGED_USB;
 
 public class ServerSettings extends AppCompatActivity {
 
-    String[] proc = {"1", "2", "3", "4", "5","6", "7", "8", "9", "10" };
-    private Switch mSwitch;
+    String[] proc = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,17 +37,18 @@ public class ServerSettings extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setAdapter(adapter);
+
         WiFi();
+        Power();
 
     }
 
 
-    public void WiFi(){
-        mSwitch = (Switch) findViewById(R.id.switch2);
-        // устанавливаем переключатель программно в значение ON
-        mSwitch.setChecked(true);
+    public void WiFi() {
+        Switch sw = (Switch) findViewById(R.id.switch2);
+
         // добавляем слушателя
-        mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -70,9 +64,62 @@ public class ServerSettings extends AppCompatActivity {
         });
     }
 
+  public void Power(){
+      Switch sw = (Switch) findViewById(R.id.switch1);
 
+      // добавляем слушателя
+      sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+          @Override
+          public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+              // в зависимости от значения isChecked выводим нужное сообщение
+              if (isChecked) {
+
+                  IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+                  Intent batteryStatus = getApplicationContext().registerReceiver(null, ifilter);
+                  int status = batteryStatus.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+                  boolean isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL;
+
+                  if (isCharging) {
+                      AlertDialog.Builder builder = new AlertDialog.Builder(ServerSettings.this);
+                      builder.setTitle("Подключен к зарядке")
+                              .setCancelable(false)
+                              .setNegativeButton("ОК",
+                                      new DialogInterface.OnClickListener() {
+                                          public void onClick(DialogInterface dialog, int id) {
+                                              dialog.cancel();
+                                          }
+                                      });
+
+                      AlertDialog alert = builder.create();
+                      alert.show();
+                  }else {AlertDialog.Builder builder = new AlertDialog.Builder(ServerSettings.this);
+                      builder.setTitle("Подключите зарядку")
+                              .setCancelable(false)
+                              .setNegativeButton("ОК",
+                                      new DialogInterface.OnClickListener() {
+                                          public void onClick(DialogInterface dialog, int id) {
+                                              dialog.cancel();
+                                          }
+                                      });
+
+                      AlertDialog alert = builder.create();
+                      alert.show();}
+              } else {
+                  AlertDialog.Builder builder = new AlertDialog.Builder(ServerSettings.this);
+                  builder.setTitle("Работа в обычном режиме ")
+                          .setCancelable(false)
+                          .setNegativeButton("ОК",
+                                  new DialogInterface.OnClickListener() {
+                                      public void onClick(DialogInterface dialog, int id) {
+                                          dialog.cancel();
+                                      }
+                                  });
+
+                  AlertDialog alert = builder.create();
+                  alert.show();
+
+              }
+          }
+      });
+  }
 }
-
-
-
-
