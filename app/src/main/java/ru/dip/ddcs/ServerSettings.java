@@ -104,6 +104,7 @@ public class ServerSettings extends AppCompatActivity {
 
                       AlertDialog alert = builder.create();
                       alert.show();}
+
               } else {
                   AlertDialog.Builder builder = new AlertDialog.Builder(ServerSettings.this);
                   builder.setTitle("Работа в обычном режиме ")
