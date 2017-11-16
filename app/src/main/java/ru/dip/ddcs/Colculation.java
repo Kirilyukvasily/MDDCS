@@ -27,11 +27,16 @@ public class Colculation extends AppCompatActivity {
     }
 
     public void newScreen2(View v) {
-        Intent intObj = new Intent(this, Main22Activity.class);
+
+       // new Thread(new SolveThread(this)).start();
+
+    Intent intObj = new Intent(this, Main2Activity.class);
         startActivity(intObj);
     }
 
     public void newScreen3(View v) {
+
+
         Intent intObj = new Intent(this, BDActivity.class);
         startActivity(intObj);
     }
@@ -49,5 +54,24 @@ public class Colculation extends AppCompatActivity {
     public void newScreen6(View v) {
         Intent intObj = new Intent(this, ConnectionServer.class);
         startActivity(intObj);
+    }
+
+    class SolveThread implements Runnable{
+
+        Colculation colculation;
+
+        SolveThread(Colculation colculation){
+            this.colculation = colculation;
+        }
+        public void run(){
+
+            try{
+                Intent intObj = new Intent(colculation, Main2Activity.class);
+                startActivity(intObj);
+            }
+            catch(Exception ex){
+                System.out.println(ex.getMessage());
+            }
+        }
     }
 }

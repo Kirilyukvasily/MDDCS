@@ -1625,7 +1625,7 @@ public class GIRwithcDislocProblem {
         m_rastSgatie = tmp_rastSgatie;
         m_countRastSgatie = tmp_countRastSgatie;
 
-       et.setText("dgdh");
+       //et.setText("dgdh");
 
         boolean rez = SolveGIR();
 
@@ -1635,7 +1635,7 @@ public class GIRwithcDislocProblem {
         InsertEndPoint2();
 
         m_countRastSgatie = tmp_countRastSgatie;
-        double rend_tmp = m_save.GetParam(m_dislocId, 2, et); //double rend_tmp = m_save.Disloc.GetDislocData(m_save.Disloc.GetCountDislocData() - 1).GetParam(2);
+        double rend_tmp = m_save.GetParam(m_dislocId, 2); //double rend_tmp = m_save.Disloc.GetDislocData(m_save.Disloc.GetCountDislocData() - 1).GetParam(2);
         if (rend_cDisloc > rend_tmp)
         {
             rend_cDisloc = rend_tmp;
@@ -1714,11 +1714,11 @@ public class GIRwithcDislocProblem {
         */
         if (m_solveSrednZnach)
         {
-            et.setText(et.getText()+" ee");
+            //et.setText(et.getText()+" ee");
             m_save.SaveDislocSrednZnach(ct,e0);
         }
         m_insertPoint.Clear();
-        et.setText(et.getText()+" 111");
+        //et.setText(et.getText()+" 111");
         return rez;
     }
 

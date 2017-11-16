@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.widget.RadioButton;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TextView;
+import 	android.app.Activity;
 
 
 import java.io.File;
@@ -71,18 +73,7 @@ public class Main2Activity extends ActionBarActivity {
                     e.printStackTrace();
                 }
 
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Main2Activity.this);
-                    builder.setTitle("Расчет завершен")
-                            .setCancelable(false)
-                            .setNegativeButton("ОК",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int id) {
-                                            dialog.cancel();
-                                        }
-                                    });
 
-                    AlertDialog alert = builder.create();
-                    alert.show();
 
 
 
@@ -99,87 +90,9 @@ public class Main2Activity extends ActionBarActivity {
 
 
             private void Run() throws IOException {
-                //double time = 0;
-                //int j = 0;
-                // Stopwatch time1 = new Stopwatch();
-                // time1.Start();
-                // ----- Во время расчетов менеджер сделаем невидимым,
-                // ----- что создает эффект закрытия менеджера.
-                // this.Visible = false;
-                // ----- Обновим отображение форм, чтобы убрать
-                // ----- деффект наложения менеджера на главном окне
-                //Application.DoEvents();
+
                 int maxZonaId = 2;
                 int maxSeriiId = 5;
-                // ----- Установим настройки сохранения
-               /* cSave save = new cSave(m_editorOptionsBuilder.GetTypeSaveResultsList(),
-                        m_dataBaseBuilder, m_editorOptionsForm.GetOptions().GetKatalogEksporta(),
-                        m_editorOptionsForm.GetOptions().GetEksportList(), m_dislocObserver);*/
-                // ----- Вычислим серию зон сдвига
-                //if( CheckBoxSolveSerii.Checked )
-                //{
-                //save.CreateSerii(maxSeriiId, m_parametersBuilder.GetParametersSerii());
-                    /*double lgr = Double.parseDouble(((EditText) findViewById(R.id.editText6)).getText().toString());
-                    double rgr = Double.parseDouble(((EditText) findViewById(R.id.editText7)).getText().toString());
-                    double h = Double.parseDouble(((EditText) findViewById(R.id.editText8)).getText().toString());
-                    int i = 1;
-                    //cParametersZona parametersZona = m_parametersBuilder.GetParametersZona();
-                    for (; lgr <= rgr; ++maxZonaId, ++i)
-                    {
-                        *//*if (rbTemperatura.Checked)
-                        {
-                            m_parametersBuilder.SetT(lgr, m_metall);
-                            parametersZona.SetT(lgr);
-                        }
-                        else if (rbNapr.Checked)
-                        {
-                            parametersZona.SetNapr(lgr);
-                        }
-                        else if (rbPlotnost.Checked)
-                        {
-                            parametersZona.SetRo(lgr);
-                        }
-                        else if (rbNaprCr.Checked)
-                        {
-                            parametersZona.SetTauf(lgr);
-                        }*//*
-                        //parametersZona.SetN(i);
-                        // ----- Выполним расчет
-                        Solve(maxZonaId, maxSeriiId, save);
-                        //Äîáàâëåíèå çîíû â ñåðèþ
-                        //save.AddZonaForSerii();
-                        // ----- Увеличим значение изменяемого параметра
-                       *//* if (m_parametersBuilder.GetParametersSerii().GetArifmProgres())
-                        {
-                            lgr += h;
-                        }
-                        else
-                        {
-                            lgr *= h;
-                        }*//*
-                    }*/
-                        /*if (save.Serii != null)
-                        {
-                            save.Serii.GetParameters().SetN(i - 1);
-                            m_dataBaseBuilder.GetDataBase().AddSerii(save.Serii);
-                        }*/
-                // }
-                // ----- Вычислим зону сдвига*/
-                    /*else
-                    {
-                        m_parametersBuilder.SetT( Convert.ToDouble(EditT.Text), m_metall );
-                        Solve( maxZonaId, maxSeriiId);//расчитать
-                        if (save.Zona != null)
-                        {
-                            m_dataBaseBuilder.GetDataBase().AddZona(save.Zona);
-                        }*/
-
-
-                // ----- Вычислим время проведения вычислений
-                //time1.Stop();
-                //StreamWriter timefile = new StreamWriter("Data/time.txt");
-                //timefile.WriteLine(time1.Elapsed.TotalMinutes);
-                //timefile.Close();*/
 
                 double U = Double.parseDouble(((EditText) findViewById(R.id.editText)).getText().toString());
                 double t0 = Double.parseDouble(((EditText) findViewById(R.id.editText2)).getText().toString());
@@ -236,39 +149,112 @@ public class Main2Activity extends ActionBarActivity {
                 //m_progressBar.ProgressBar.Invoke((MethodInvoker)delegate { m_progressBar.Maximum = numbersDislocations.Size() + 1; });
                 //m_progressBar.ProgressBar.Invoke((MethodInvoker)delegate { m_progressBar.Value = 1; });
                 //Application.DoEvents();
+
+                SolveThread solveThread = new SolveThread(numbersDislocations,save,method,parametersZona);
+                //SolveThread solveThread = new SolveThread();
+                solveThread.SetListNumberDislocation(((EditText) findViewById(R.id.editText20)).getText().toString());
+                solveThread.SetSave(m_dataBaseBuilder, Path, exportlist, null);
+                try {
+                    solveThread.start();
+                }
+                catch(Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+
+             //   method.Solve();
+            }
+
+            class SolveThread extends Thread implements Runnable {
+
+                cListNumberDislocation numbersDislocations;
+                cSave save;
+                GIRwithcDislocProblem method;
+                cParametersZona parametersZona;
+                SolveThread(){
+                    int t =0;
+                }
+
+                SolveThread(cListNumberDislocation numbersDislocations, cSave save, GIRwithcDislocProblem method
+                 ,cParametersZona tParametersZona){
+                    this.numbersDislocations = numbersDislocations;
+                    this.save = save;
+                    this.method = method;
+                    parametersZona = tParametersZona;
+                }
+
+                void SetListNumberDislocation(String pString)
                 {
-                    //pSave.SetStateZona(cZona.State.Solvered); //zona.SetState(cZona.State.Solvered);
-                    for (numbersDislocations.Open(); !numbersDislocations.Eof; numbersDislocations.Next())
-                    {
-                        // ----- Создание и сохранение дислокации
-                        save.CreateDisloc(0, numbersDislocations.GetId()); //index??? countAngle???
-                        // ----- Ñîçäàåì ñòàòèñòèêó
+                    numbersDislocations = new cListNumberDislocation((((EditText) findViewById(R.id.editText20)).getText().toString())) ;
+                }
+
+
+                void SetSave(cDataBaseProxyBuilder pDataBaseBuilder, String pKatalogExporta,
+                             boolean[] pExportList, cDislocObserver pDislocObserver) throws IOException {
+                    boolean[] exportlist = {true, true, true, true, true, true, true, true, true, true, true, true};
+                    // получаем путь к SD
+                    File sdPath = Environment.getExternalStorageDirectory();
+                    // добавляем свой каталог к пути
+                    String Path=(sdPath.getAbsolutePath() + "/" + "DDCSData");
+                    //save = new cSave(m_dataBaseBuilder, Path, exportlist, null);
+                    cSave tSave = new cSave(m_dataBaseBuilder, Path, exportlist, null);
+
+                    cParametersZona parametersZona = this.parametersZona;
+
+                    this.save.CreateZona(1,this.parametersZona);
+                }
+
+                @Override
+                public void run(){
+                   // Log.d("Вася хороший", "не очень");
+                    try{
+
+                        for (numbersDislocations.Open(); !numbersDislocations.Eof; numbersDislocations.Next())
+                        {
+                            // ----- Создание и сохранение дислокации
+                            save.CreateDisloc(0, numbersDislocations.GetId()); //index??? countAngle???
+                            // ----- Ñîçäàåì ñòàòèñòèêó
                         /*if (m_stat != null)
                             m_stat.CreateNewStatistics();*/
-                        if (method.Solve())
-                        {
-                            save.AddDislocForZona();
-                            //m_progressBar.ProgressBar.Invoke((MethodInvoker)delegate { m_progressBar.Value++; });
-                        }
-                        else
-                        {
-                            //Ïîñëåäóþùèå äèñëîêàöèè íå ñ÷èòàåì, ò.ê. åñëè äàííàÿ
-                            //äèñëîêàöèÿ íå ãåíåðèðóåòñÿ, òî è ïîñëåäóþùèå òîæå íå áóäóò
-                            for (; !numbersDislocations.Eof; numbersDislocations.Next())
+                            if (method.Solve())
                             {
-                               // m_progressBar.ProgressBar.Invoke((MethodInvoker)delegate { m_progressBar.Value++; });
+                                save.AddDislocForZona();
+                                //m_progressBar.ProgressBar.Invoke((MethodInvoker)delegate { m_progressBar.Value++; });
                             }
-                            break;
-                        }
+                            else
+                            {
+                                //Ïîñëåäóþùèå äèñëîêàöèè íå ñ÷èòàåì, ò.ê. åñëè äàííàÿ
+                                //äèñëîêàöèÿ íå ãåíåðèðóåòñÿ, òî è ïîñëåäóþùèå òîæå íå áóäóò
+                                for (; !numbersDislocations.Eof; numbersDislocations.Next())
+                                {
+                                    // m_progressBar.ProgressBar.Invoke((MethodInvoker)delegate { m_progressBar.Value++; });
+                                }
+                                break;
+                            }
                       /*  if (m_stat != null)
                         {
                             m_stat.ShowStatisticWindow();
                             m_stat.ClearStatisticWindow();
                         }*/
+                        }
+
+                        /*AlertDialog.Builder builder = new AlertDialog.Builder(Main2Activity.this);
+                        builder.setTitle("Расчет завершен")
+                                .setCancelable(false)
+                                .setNegativeButton("ОК",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+                                                dialog.cancel();
+                                            }
+                                        });
+
+                        AlertDialog alert = builder.create();
+                        alert.show();*/
+
+                    }
+                    catch(Exception ex) {
+                        System.out.println(ex.getMessage());
                     }
                 }
-
-             //   method.Solve();
             }
 
 
@@ -418,243 +404,7 @@ public class Main2Activity extends ActionBarActivity {
     }
 
     void Solve() {
-       /* int index = 0;
-        ModelsTree model = m_model.GetNodeByIndex(0);
-        while( model != null )
-        {
-            if( model.GetType() == ModelsTree.Type.SelectRadioButton )
-            {
-                break;
-            }
-            model = m_model.GetNodeByIndex(++index);
-        }*/
-        // ----- Ñîçäàåì ÷èñëåííûé ìåòîä è óêàçûâàåì ïàðàìåòðû ìåòîäà
-        // cNumericalMethod method;// к этому ровнять
-        //cMethodParameters methodParameters = m_editorOptionsBuilder.GetMethodParameters();
-        //switch( methodParameters.GetMethod() )
-        //{
-        //    case cMethodParameters.Method.Gear:
-        //method = (cNumericalMethod)new GIR(m_stat); //взять это вместо m_editorOptionsBuilder
-        //        break;
-        //    case cMethodParameters.Method.Rosenbroc:
-        //        method = (cNumericalMethod)new GIR(m_stat);
-        //        break;
-        //    default:
-        //        method = null;
-        //        break;
-        //}
-        /*if(methodParameters.GetMinStepBool())
-            method.SetMinStep(methodParameters.GetMinStep());
-        if(methodParameters.GetMaxStepBool())
-            method.SetMaxStep(methodParameters.GetMaxStep());
-        // ----- Êîíå÷íóþ òî÷êó ðàñ÷åòà çàäàåì äàæå åñëè
-        // ----- â íàñòðîéêàõ îíà íå çàäàíà (â ýòîì
-        // ----- ñëó÷àå îíà áóäåò ðàâíà ìàêñèìàëüíî
-        // ----- âîçìîæíîìó çíà÷åíèþ 1E+300)
-        double xend = 1E+300;
-        if(methodParameters.GetTNBool()){
-            xend = methodParameters.GetTN();
-        }
-        method.SetTN(xend);
-        method.SetTOL(methodParameters.GetTOL());
-        // ----- Èíèöèàëèçèðóåì âûáðàííóþ ìîäåëü
-        cProbeFunction problem = null;
-        boolean interaction = false;
-        int countAngle = Integer.parseInt(tbCountParts.Text);*/
-       /* switch( index )
-        {
-            case 0:
-                if ((model.GetNodeByIndex(6)).GetType() == ModelsTree.Type.NoSelectCheckBox)
-                {
-                    if ((model.GetNodeByIndex(4)).GetType() == ModelsTree.Type.NoSelectCheckBox)
-                    {
-                        if (model.GetNodeByIndex(0).GetNodeByIndex(0).GetType() == ModelsTree.Type.SelectCheckBox ||
-                                model.GetNodeByIndex(1).GetNodeByIndex(0).GetType() == ModelsTree.Type.SelectCheckBox)
-                        {
-                            // ----- Модель с ориенттационной зависимостью
-                            // ----- (не учитывыается взаимодействие дислокаций)
-                            problem = (cProbeFunction)new cDislocProblemWithOrientation(
-                                    method, m_parametersBuilder, m_model, m_rastSgatie,
-                                    m_parametersBuilder.GetParametersZona().GetMinCountCicle(),
-                                    m_editorOptionsForm.GetOptions().GetCountSubintervals(), pSave, countAngle, xend);
-                            index = 1;
-                        }
-                        else
-                        {
-                            // ----- Без учета ориенттационной зависимости
-                            // ----- и взаимодействия дислокаций
-                            problem = (cProbeFunction)new cDislocProblem(method,
-                                    m_parametersBuilder, m_model, m_rastSgatie,
-                                    m_parametersBuilder.GetParametersZona().GetMinCountCicle(),
-                                    m_editorOptionsForm.GetOptions().GetCountSubintervals(), pSave, xend);
-                        }
-                    }
-                    else
-                    {
-                        // ----- Модель со взаимодействием дислокаций
-                        // ----- (не учитывыается ориентационная зависимость)
-                        problem = (cProbeFunction)new cDislocProblemWithInteraction(method,
-                                m_parametersBuilder, m_model, m_rastSgatie,
-                                m_parametersBuilder.GetParametersZona().GetMinCountCicle(),
-                                m_editorOptionsForm.GetOptions().GetCountSubintervals(), pSave, xend);
-                        interaction = true;
-                    }
-                }
-                else
-                {
-                    // ----- Модель с учетом самодействия
-                    // ----- (не учитывыается ориентационная зависимость и взаимодействие дислокаций)
-                    //problem = (cProbeFunction)new cDislocProblemItself(method,
-                    //    m_parametersBuilder, m_model, m_rastSgatie,
-                    //    m_parametersBuilder.GetParametersZona().GetMinCountCicle(),
-                    //    m_editorOptionsForm.GetOptions().GetCountSubintervals(), pSave, xend, countAngle);
-                    problem = (cProbeFunction)new cDislocProblemItself_with_GIR(method,
-                            m_parametersBuilder, m_model, m_rastSgatie,
-                            m_parametersBuilder.GetParametersZona().GetMinCountCicle(),
-                            m_editorOptionsForm.GetOptions().GetCountSubintervals(), pSave, xend, countAngle);
-                    index = -1;
-                }
-                break;
-            case 1:
-                int countmodels = model.GetCount();
-                int index2 = 0;
-                for(; index2 < countmodels; ++index2 )
-                {
-                    if( model.GetNodeByIndex(index2).GetType() ==
-                            ModelsTree.Type.SelectRadioButton )
-                        break;
-                }
-                switch( index2 )
-                {
-                    case 0:
-                        problem = (cProbeFunction)new cVanDerPolProblem(method, pSave);
-                        break;
-                    case 1:
-                        problem = (cProbeFunction)new cBogofferVanDerPolProblem(method, pSave);
-                        break;
-                    case 2:
-                        problem = (cProbeFunction)new cTestGlicolizModelProblem(method, pSave);
-                        break;
-                    case 3:
-                        problem = (cProbeFunction)new cTestMikeDisserStr129(method, pSave);
-                        break;
-                    case 4:
-                        problem = (cProbeFunction)new cTestRobertsonModelProblem(method, pSave);
-                        break;
-                    case 5:
-                        problem = (cProbeFunction)new cTestOregonatorProblem(method, pSave);
-                        break;
-                    case 6:
-                        problem = (cProbeFunction)new cTestStiffSystem1Problem(method, pSave);
-                        break;
-                    case 7:
-                        problem = (cProbeFunction)new cTestMathCadProblem(method, pSave);
-                        break;
-                    case 8:
-                        problem = (cProbeFunction)new cTestStiffSystem17Problem(method, pSave);
-                        break;
-                    case 9:
-                        problem = (cProbeFunction)new AmosovDubinskijKopchenova473(method, pSave);
-                        break;
-                    case 10:
-                        problem = (cProbeFunction)new Hoffman407(method, pSave);
-                        break;
-                    case 11:
-                        problem = (cProbeFunction)new Tahmasbi708(method, pSave);
-                        break;
-                    case 12:
-                        problem = (cProbeFunction)new cSrccMsuSu(method, pSave);
-                        break;
-                    case 13:
-                        problem = (cProbeFunction)new cRingModulator(method, pSave);
-                        break;
-                    case 14:
-                        problem = (cProbeFunction)new cAirPollution(method, pSave);
-                        break;
-                    case 15:
-                        problem = (cProbeFunction)new cDifferentiationPlantTissue(method, pSave);
-                        break;
-                    case 16:
-                        problem = (cProbeFunction)new cEcoGenetic(method, pSave);
-                        break;
-                    case 17:
-                        //problem = (cProbeFunction*)new cSrccMsuSu(method, pSave);
-                        break;
-                    default:
-                        MessageBox.Show("Модель не выбрана или выбрана неверно!", "Ошибка!");
-                        return null;
-                }
-                break;
-            case 2:
-                // ----- Динамика планарных дислокаций
-                problem = (cProbeFunction)new cDislocProblemPlanar(method,
-                        m_parametersBuilder, m_model, m_rastSgatie,
-                        m_parametersBuilder.GetParametersZona().GetMinCountCicle(),
-                        m_editorOptionsForm.GetOptions().GetCountSubintervals(), pSave, xend);
-                break;
-            default:
-                MessageBox.Show("Модель не выбрана или выбрана неверно!", "Ошибка!");
-                return null;
-        }
-        // ----- Äîáàâëÿåì ê ìåòîäó ìîäåëü
-        if( problem != null )
-            method.SetModel(problem);
-        // ----- Создание и сохранение зоны
-        pSave.CreateZona(maxZonaId, m_parametersBuilder.GetParametersZona());
-        if (m_stat != null)
-        {
-            pSave.SetStatistic(m_stat);
-        }*/
 
-
-
-
-    //if (problem.Solve())
-
-
-                /*{
-                    pSave.AddDislocForZona();
-                    m_progressBar.ProgressBar.Invoke((MethodInvoker)delegate { m_progressBar.Value++; });
-                }
-                else
-                {
-                    //Ïîñëåäóþùèå äèñëîêàöèè íå ñ÷èòàåì, ò.ê. åñëè äàííàÿ
-                    //äèñëîêàöèÿ íå ãåíåðèðóåòñÿ, òî è ïîñëåäóþùèå òîæå íå áóäóò
-                    for (; !numbersDislocations.Eof; numbersDislocations.Next())
-                    {
-                        m_progressBar.ProgressBar.Invoke((MethodInvoker)delegate { m_progressBar.Value++; });
-                    }
-                    break;
-                }
-                if (m_stat != null)
-                {
-                    m_stat.ShowStatisticWindow();
-                    m_stat.ClearStatisticWindow();
-                }
-            }
-        }
-        if (m_stat != null)
-        {
-            m_stat.CloseStatisticWindow();
-            m_stat.ClearStatisticWindow();
-        }
-        m_progressBar.ProgressBar.Invoke((MethodInvoker)delegate { m_progressBar.Maximum = numbersDislocations.Size(); });
-        m_progressBar.ProgressBar.Invoke((MethodInvoker)delegate { m_progressBar.Value = 0; });
-        if (problem != null)
-        {
-            problem.Dispose();
-        }
-        if (numbersDislocations != null)
-        {
-            numbersDislocations.Dispose();
-        }
-        if (m_stat != null)
-        {
-            m_stat.Dispose();
-        }
-        pSave.SaveZonaSrednZnach();
-        return pSave.Zona;
-    }*/
     }
     class DBHelper extends SQLiteOpenHelper {
 

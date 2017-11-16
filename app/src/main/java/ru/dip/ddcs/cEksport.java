@@ -950,18 +950,25 @@ public class cEksport {
     public double GetParam(int pId, int param) throws IOException {
         // ----- Читаем весь файл
 
-        BufferedReader br = new BufferedReader(new FileReader(m_katalog + m_nameSerii + m_nameZona + "Disloc" +String.valueOf(pId) + ".txt"));
-        String s,s2 = null;
+        File sdFile = new File(m_katalog + "/" + m_nameZona, "Disloc1"  + ".txt");
+        BufferedReader br = new BufferedReader(new FileReader(sdFile));
+
+        String str = "";
+        // читаем содержимое
+        str = br.readLine();
+
+        str = br.readLine();
+
+        String s=str;
+        String s2 = s;
         while ((s=br.readLine()) != null)
         {
-            s2=s2+s+"\n";
+            if(!s.isEmpty())
+                s2=s;
         }
-        String[] fileStrings = s2.split("\n");
-        // ----- Выбираем из него последнюю строку
-        String lastString = fileStrings[fileStrings.length - 1];
         // ----- Находим второй слово (число) - радиус зоны сдвига
-        String[] datas = lastString.split("\t");
-        double res = Double.parseDouble((datas[param]).replace(".", ","));
+        String[] datas = s2.split(" ");
+        double res = Double.parseDouble(datas[param]);
         return res;
     }
 
