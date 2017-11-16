@@ -8,18 +8,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-public class ConnectionServer extends AppCompatActivity {
+public class Compact extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_connection_server);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setContentView(R.layout.activity_compact);
 
-    }
+            }
+
     public void newScreen5(View v) {
-        Intent intObj = new Intent(this, Compact.class);
+        Intent intObj = new Intent(this, ServerSettings.class);
         startActivity(intObj);
     }
+
+
 }

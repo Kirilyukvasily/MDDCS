@@ -4,24 +4,21 @@
 
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="25"
-        />
+        android:maxSdkVersion="25" />
 
-
-    <!--permission ge enable and disable WIFI in android-->
+    <!-- permission ge enable and disable WIFI in android -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+
     <uses-feature android:name="android.hardware.wifi" />
 
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 
-    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
-    <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
-    <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
-
-
+    <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+    <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
 
     <application
         android:allowBackup="true"
@@ -54,22 +51,27 @@
         <activity
             android:name=".Colculation"
             android:label="Расчет"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ServerSettings"
             android:label="Настройки"
             android:theme="@style/AppTheme">
             <intent-filter>
-                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
-                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
-              </intent-filter>
+                   
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                   
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+                 
+            </intent-filter>
         </activity>
         <activity
             android:name=".ConnectionServer"
             android:label="Подключение к серверу"
-            android:theme="@style/AppTheme">
-
-        </activity>
+            android:theme="@style/AppTheme"></activity>
+        <activity
+            android:name=".Compact"
+            android:label="@string/title_activity_compact"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

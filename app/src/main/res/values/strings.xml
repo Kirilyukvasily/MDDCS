@@ -29,6 +29,7 @@
     <string name="title_activity_server_settings">ServerSettings</string>
     <string name="title_activity_dfsfdg">dfsfdg</string>
     <string name="title_activity_connection_server">ConnectionServer</string>
+    <string name="title_activity_compact">Compact</string>
 
 
 </resources>
