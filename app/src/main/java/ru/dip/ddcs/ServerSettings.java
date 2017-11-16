@@ -1,4 +1,6 @@
 package ru.dip.ddcs;
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -6,8 +8,10 @@ import android.content.IntentFilter;
 import android.net.wifi.WifiManager;
 import android.os.BatteryManager;
 import android.os.Bundle;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
@@ -21,6 +25,7 @@ import static android.os.BatteryManager.BATTERY_PLUGGED_USB;
 public class ServerSettings extends AppCompatActivity {
 
     String[] proc = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,4 +128,6 @@ public class ServerSettings extends AppCompatActivity {
           }
       });
   }
+
+
 }

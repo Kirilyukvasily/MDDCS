@@ -1,16 +1,24 @@
 package ru.dip.ddcs;
 
+import android.annotation.TargetApi;
 import android.app.Application;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
@@ -35,7 +43,8 @@ import ru.dip.ddcs.fragments.Fragmentnach;
 
 
 public class Main2Activity extends ActionBarActivity {
-
+    private PendingIntent contentIntent;
+    private static final int NOTIFY_ID = 101;
     protected static final String LOG_TAG = "my_tag";
     TabHost.TabSpec tabSpec;
     Fragmentnach fnach;
@@ -236,6 +245,8 @@ public class Main2Activity extends ActionBarActivity {
                             m_stat.ClearStatisticWindow();
                         }*/
                         }
+                        Push();
+
 
                         /*AlertDialog.Builder builder = new AlertDialog.Builder(Main2Activity.this);
                         builder.setTitle("Расчет завершен")
@@ -445,7 +456,29 @@ public class Main2Activity extends ActionBarActivity {
 
         }
 
+
     }
+    public void Push(){
+        Notification.Builder builder = new Notification.Builder(this);
+// оставим только самое необходимое
+
+        builder.setContentIntent(contentIntent)
+                .setSmallIcon(R.drawable.abc_btn_check_material)
+                .setContentTitle("Напоминание")
+                .setContentText("Пора покормить кота"); // Текст уведомления
+
+        Notification notification = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
+            notification = builder.build();
+        }
+        notification.defaults = Notification.DEFAULT_SOUND |
+                Notification.DEFAULT_VIBRATE;
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        notificationManager.notify(NOTIFY_ID, notification);
+    }
+
+
+
 
 
 }
