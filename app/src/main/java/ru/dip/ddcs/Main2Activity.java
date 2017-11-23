@@ -460,12 +460,11 @@ public class Main2Activity extends ActionBarActivity {
     }
     public void Push(){
         Notification.Builder builder = new Notification.Builder(this);
-// оставим только самое необходимое
 
         builder.setContentIntent(contentIntent)
                 .setSmallIcon(R.drawable.abc_btn_check_material)
-                .setContentTitle("Напоминание")
-                .setContentText("Пора покормить кота"); // Текст уведомления
+                .setContentTitle("MDDCS")
+                .setContentText("Расчет закончен!"); // Текст уведомления
 
         Notification notification = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
