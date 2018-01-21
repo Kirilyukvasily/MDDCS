@@ -34,5 +34,8 @@
         android:textColor="@color/abc_input_method_navigation_guard"
         app:backgroundTint="@android:drawable/ic_media_play"
         android:layout_below="@+id/button8"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="onMyClick"
+        tools:onClick="onMyClick"
+        android:clickable="false" />
 </RelativeLayout>

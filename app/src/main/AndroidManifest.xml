@@ -72,6 +72,8 @@
             android:name=".Compact"
             android:label="@string/title_activity_compact"
             android:theme="@style/AppTheme"></activity>
+
+        <receiver android:name=".IBroadcastReceiver" />
     </application>
 
 </manifest>

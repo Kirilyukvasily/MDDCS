@@ -1,6 +1,8 @@
 package ru.dip.ddcs;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,7 +15,14 @@ import android.widget.ImageView;
 public class MainActivity extends AppCompatActivity {
     final String LOG_TAG = "myLogs";
     //DBHelper dbHelper;
-
+    public static String _FileSettingsName = "ServerSettings";
+    public static String _FileSettingsWiFi = "WiFiSettings";
+    public static String _FileSettingsPower = "PowerSettings";
+    public static String _FileSettingsLowPower = "LowPowerSettings";
+    public static boolean _WiFiIsActive = false;
+    public static boolean _OnlyPower = false;
+    public static boolean _LowPower = false;
+    public static  SharedPreferences mSettings;
     /** Called when the activity is first created. */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,13 +32,42 @@ public class MainActivity extends AppCompatActivity {
         // создаем объект для создания и управления версиями БД
         //dbHelper = new DBHelper(this);
 
+        mSettings = getSharedPreferences(_FileSettingsName, Context.MODE_PRIVATE);
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Запоминаем данные
+        SharedPreferences.Editor editor = mSettings.edit();
+        editor.putBoolean(_FileSettingsWiFi, _WiFiIsActive);
+        editor.putBoolean(_FileSettingsPower, _OnlyPower);
+        editor.putBoolean(_FileSettingsLowPower, _LowPower);
+        editor.apply();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-
+        if (mSettings.contains(_FileSettingsWiFi)) {
+            // Получаем число из настроек
+            _WiFiIsActive = mSettings.getBoolean(_FileSettingsWiFi,false);
+            // Выводим на экран данные из настроек
+        }
+        if (mSettings.contains(_FileSettingsPower)) {
+            // Получаем число из настроек
+            _OnlyPower = mSettings.getBoolean(_FileSettingsPower,false);
+            // Выводим на экран данные из настроек
+        }
+        if (mSettings.contains(_FileSettingsLowPower)) {
+            // Получаем число из настроек
+            _LowPower = mSettings.getBoolean(_FileSettingsLowPower,false);
+            // Выводим на экран данные из настроек
+        }
+    }
     public void newScreen(View v) {
 
         Intent intObj = new Intent(this, Main2Activity.class);
