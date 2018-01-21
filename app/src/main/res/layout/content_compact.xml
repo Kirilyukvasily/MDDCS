@@ -10,8 +10,11 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="ru.dip.ddcs.Compact"
-    tools:showIn="@layout/activity_compact">
+    tools:context="@mipmap/ic_rasch"
+    tools:showIn="@layout/activity_compact"
+    android:background= "@drawable/abc_cab_background_internal_bg"
+    tools:layout_height="wrap_content"
+    android:elevation="0dp">
 
     <Button
         android:layout_height="35dp"
@@ -24,19 +27,32 @@
         android:onClick="newScreen5"
         tools:onClick="newScreen5" />
 
+    <ProgressBar
+        style="@android:style/Widget.Material.Light.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:id="@+id/progressBar2"
+        android:indeterminate="false"
+        android:layout_marginBottom="68dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
     <Button
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:layout_marginTop="91dp"
         android:id="@+id/button9"
-        android:background="@drawable/abc_btn_check_material"
+        android:background="@mipmap/ic_nuch"
         style="@style/Widget.AppCompat.Button"
         android:textColor="@color/abc_input_method_navigation_guard"
-        app:backgroundTint="@drawable/abc_btn_check_to_on_mtrl_000"
+        app:backgroundTint="@mipmap/ic_nuch"
         android:onClick="onMyClick"
         tools:onClick="onMyClick"
         android:clickable="false"
-        android:text="Расчитать"
-        android:layout_below="@+id/button8"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignWithParentIfMissing="true"
+        android:cursorVisible="false"
+        android:layout_above="@+id/progressBar2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="85dp" />
+
 </RelativeLayout>

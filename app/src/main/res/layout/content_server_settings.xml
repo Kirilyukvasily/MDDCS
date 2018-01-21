@@ -40,7 +40,8 @@
         android:id="@+id/textView27"
         android:layout_above="@+id/spinner"
         android:layout_toRightOf="@+id/textView18"
-        android:layout_toEndOf="@+id/textView18" />
+        android:layout_toEndOf="@+id/textView18"
+        android:textColor="@color/abc_input_method_navigation_guard" />
 
     <TextView
         android:text="Выберите количество ядер"
@@ -49,7 +50,8 @@
         android:id="@+id/textView18"
         android:layout_below="@+id/editText5"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@color/abc_input_method_navigation_guard" />
 
     <Spinner
         android:layout_width="match_parent"
@@ -79,5 +81,15 @@
         android:layout_below="@+id/spinner"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/imageView3"
+        android:layout_below="@+id/button7"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="17dp"
+        android:src="@mipmap/ic_nastroiki" />
 
 </RelativeLayout>

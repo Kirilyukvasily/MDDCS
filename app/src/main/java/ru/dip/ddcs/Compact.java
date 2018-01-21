@@ -2,6 +2,7 @@ package ru.dip.ddcs;
 
 import android.app.Notification;
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,6 +13,7 @@ import android.net.NetworkInfo;
 import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.NotificationManagerCompat;
@@ -23,6 +25,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 
 import static android.os.BatteryManager.BATTERY_PLUGGED_AC;
@@ -39,6 +42,7 @@ public class Compact extends AppCompatActivity  {
     cDataBaseProxyBuilder m_dataBaseBuilder = null;
     private PendingIntent contentIntent;
     private static final int NOTIFY_ID = 101;
+
 
     boolean isCharging;
     boolean isWifi;
@@ -58,6 +62,7 @@ public class Compact extends AppCompatActivity  {
         startActivity(intObj);
     }
     public void onMyClick(View view) throws IOException {
+
         IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
         Intent batteryStatus = getApplicationContext().registerReceiver(null, ifilter);
         int status =  batteryStatus.getIntExtra(BatteryManager.EXTRA_STATUS, -1);;
@@ -124,6 +129,7 @@ public class Compact extends AppCompatActivity  {
             alert.show();
             return;
         }
+
             Run();
     }
 
@@ -131,6 +137,7 @@ public class Compact extends AppCompatActivity  {
 
     private void Run() throws IOException {
 
+        ProgressBar pb = (ProgressBar)findViewById(R.id.progressBar2);
         int maxZonaId = 2;
         int maxSeriiId = 5;
 
@@ -184,6 +191,8 @@ public class Compact extends AppCompatActivity  {
 
         method.SetTN(0.009);
         method.SetTOL(0.00000000001);
+
+        pb.setProgress(25);
         // !!!!! Скопировать в функцию, вызывающую данную. Учесть все зоны, если считается серия зон сдвига.
 
         //m_progressBar.ProgressBar.Invoke((MethodInvoker)delegate { m_progressBar.Maximum = numbersDislocations.Size() + 1; });
@@ -251,6 +260,8 @@ public class Compact extends AppCompatActivity  {
         @Override
         public void run(){
 
+            ProgressBar pb= (ProgressBar)findViewById(R.id.progressBar2);
+
             try{
 
                 for (numbersDislocations.Open(); !numbersDislocations.Eof; numbersDislocations.Next())
@@ -263,6 +274,7 @@ public class Compact extends AppCompatActivity  {
                     if (method.Solve())
                     {
                         save.AddDislocForZona();
+                        pb.setProgress(75);
                         //m_progressBar.ProgressBar.Invoke((MethodInvoker)delegate { m_progressBar.Value++; });
                     }
                     else
@@ -283,28 +295,19 @@ public class Compact extends AppCompatActivity  {
                 }
                 Push();
 
-
-                        /*AlertDialog.Builder builder = new AlertDialog.Builder(Main2Activity.this);
-                        builder.setTitle("Расчет завершен")
-                                .setCancelable(false)
-                                .setNegativeButton("ОК",
-                                        new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int id) {
-                                                dialog.cancel();
-                                            }
-                                        });
-
-                        AlertDialog alert = builder.create();
-                        alert.show();*/
-
             }
             catch(Exception ex) {
                 System.out.println(ex.getMessage());
             }
+            pb.setProgress(100);
+
         }
+
     }
 
+
     public void Push(){
+
         Notification.Builder builder = new Notification.Builder(this);
 
         builder.setContentIntent(contentIntent)
@@ -320,6 +323,7 @@ public class Compact extends AppCompatActivity  {
                 Notification.DEFAULT_VIBRATE;
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
         notificationManager.notify(NOTIFY_ID, notification);
+
     }
 
 }

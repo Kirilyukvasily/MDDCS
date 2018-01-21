@@ -101,43 +101,7 @@ public class ServerSettings extends AppCompatActivity {
               SharedPreferences.Editor editor = mSettings.edit();
               editor.putBoolean(_FileSettingsPower, _OnlyPower);
               editor.apply();
-              if (isChecked) {
 
-                  IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
-                  Intent batteryStatus = getApplicationContext().registerReceiver(null, ifilter);
-                  int status = batteryStatus.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
-                  boolean isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL;
-
-                  if (isCharging) {
-                      AlertDialog.Builder builder = new AlertDialog.Builder(ServerSettings.this);
-                      builder.setTitle("Подключен к зарядке")
-                              .setCancelable(false)
-                              .setNegativeButton("ОК",
-                                      new DialogInterface.OnClickListener() {
-                                          public void onClick(DialogInterface dialog, int id) {
-                                              dialog.cancel();
-                                          }
-                                      });
-
-                      AlertDialog alert = builder.create();
-                      alert.show();
-                  }else {
-                      Button button = (Button) findViewById(R.id.button9);
-                      button.setEnabled(false);
-
-                      AlertDialog.Builder builder = new AlertDialog.Builder(ServerSettings.this);
-                      builder.setTitle("Подключите зарядку")
-                              .setCancelable(false)
-                              .setNegativeButton("ОК",
-                                      new DialogInterface.OnClickListener() {
-                                          public void onClick(DialogInterface dialog, int id) {
-                                              dialog.cancel();
-                                          }
-                                      });
-
-                      AlertDialog alert = builder.create();
-                      alert.show();}
-              }
           }
       });
   }
