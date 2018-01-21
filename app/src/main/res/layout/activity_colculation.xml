@@ -23,5 +23,14 @@
 
     <include layout="@layout/content_colculation" />
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="341dp"
+
+        android:id="@+id/imageView4"
+        app:layout_anchorGravity="center_vertical|center_horizontal"
+        android:layout_gravity="bottom|center_horizontal"
+        android:src="@mipmap/ic_sinh" />
+
 
 </android.support.design.widget.CoordinatorLayout>
