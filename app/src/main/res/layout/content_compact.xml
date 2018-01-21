@@ -29,13 +29,14 @@
         android:layout_height="250dp"
         android:layout_marginTop="91dp"
         android:id="@+id/button9"
-        android:background="@android:drawable/ic_media_play"
+        android:background="@drawable/abc_btn_check_material"
         style="@style/Widget.AppCompat.Button"
         android:textColor="@color/abc_input_method_navigation_guard"
-        app:backgroundTint="@android:drawable/ic_media_play"
-        android:layout_below="@+id/button8"
-        android:layout_centerHorizontal="true"
+        app:backgroundTint="@drawable/abc_btn_check_to_on_mtrl_000"
         android:onClick="onMyClick"
         tools:onClick="onMyClick"
-        android:clickable="false" />
+        android:clickable="false"
+        android:text="Расчитать"
+        android:layout_below="@+id/button8"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

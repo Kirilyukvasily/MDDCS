@@ -41,9 +41,7 @@ public class Compact extends AppCompatActivity  {
     private static final int NOTIFY_ID = 101;
 
     boolean isCharging;
-
     boolean isWifi;
-
     Button t;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +63,16 @@ public class Compact extends AppCompatActivity  {
         int status =  batteryStatus.getIntExtra(BatteryManager.EXTRA_STATUS, -1);;
         isCharging= status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL;
 
-        boolean lowStatus =  status == BatteryManager.BATTERY_STATUS_DISCHARGING && status != BatteryManager.BATTERY_STATUS_CHARGING;
+
+        boolean lowStatus = false;
+        Intent batteryIntent = registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+        int scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+        double low = ((float)level / (float)scale) * 100.0f;
+
+        lowStatus = low < 20;
+
+        //boolean lowStatus =  status == BatteryManager.BATTERY_STATUS_DISCHARGING && status != BatteryManager.BATTERY_STATUS_CHARGING;
 
         ConnectivityManager conMan = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = conMan.getActiveNetworkInfo();

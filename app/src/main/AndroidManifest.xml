@@ -70,10 +70,10 @@
             android:theme="@style/AppTheme"></activity>
         <activity
             android:name=".Compact"
-            android:label="@string/title_activity_compact"
+            android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme"></activity>
 
-        <receiver android:name=".IBroadcastReceiver" />
+
     </application>
 
 </manifest>

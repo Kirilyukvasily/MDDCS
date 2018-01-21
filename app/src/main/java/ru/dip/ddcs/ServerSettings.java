@@ -14,6 +14,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -159,5 +160,8 @@ public class ServerSettings extends AppCompatActivity {
         });
     }
 
-
+    public void newScreen(View v) {
+        Intent intObj = new Intent(this, Compact.class);
+        startActivity(intObj);
+    }
 }

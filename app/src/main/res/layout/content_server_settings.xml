@@ -60,13 +60,15 @@
         android:layout_alignParentStart="true" />
 
     <Button
-        android:text="Расчет"
+        android:text="Назад"
         android:layout_height="wrap_content"
         android:layout_marginTop="37dp"
         android:id="@+id/button7"
         android:layout_below="@+id/switch3"
         android:layout_centerHorizontal="true"
-        android:layout_width="match_parent" />
+        android:layout_width="match_parent"
+        android:onClick="newScreen"
+        tools:onClick="newScreen" />
 
     <Switch
         android:text="Только по Wi-Fi"
