@@ -43,18 +43,22 @@ public class Compact extends AppCompatActivity  {
     private PendingIntent contentIntent;
     private static final int NOTIFY_ID = 101;
 
-
     boolean isCharging;
     boolean isWifi;
-    Button t;
+    Button t,t1,t2;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compact);
 
         t = (Button) findViewById(R.id.button9);
-
         t.setClickable(true);
+        t1 = (Button) findViewById(R.id.button10);
+        t1.setClickable(false);
+        t2 = (Button) findViewById(R.id.button11);
+        t2.setClickable(false);
     }
 
     public void newScreen5(View v) {
@@ -74,10 +78,7 @@ public class Compact extends AppCompatActivity  {
         int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
         int scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
         double low = ((float)level / (float)scale) * 100.0f;
-
         lowStatus = low < 20;
-
-        //boolean lowStatus =  status == BatteryManager.BATTERY_STATUS_DISCHARGING && status != BatteryManager.BATTERY_STATUS_CHARGING;
 
         ConnectivityManager conMan = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = conMan.getActiveNetworkInfo();
@@ -129,6 +130,9 @@ public class Compact extends AppCompatActivity  {
             alert.show();
             return;
         }
+        t.setClickable(false);
+        t1.setClickable(true);
+        t2.setClickable(true);
 
             Run();
     }

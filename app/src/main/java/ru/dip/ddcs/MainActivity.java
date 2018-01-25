@@ -13,6 +13,8 @@ import android.widget.ImageView;
 
 
 public class MainActivity extends AppCompatActivity {
+
+
     final String LOG_TAG = "myLogs";
     //DBHelper dbHelper;
     public static String _FileSettingsName = "ServerSettings";
@@ -38,6 +40,10 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
+
+
+
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -68,11 +74,12 @@ public class MainActivity extends AppCompatActivity {
             // Выводим на экран данные из настроек
         }
     }
-    public void newScreen(View v) {
+  /*  public void newScreen(View v) {
 
         Intent intObj = new Intent(this, Main2Activity.class);
         startActivity(intObj);
-    }
+        }*/
+
     public void newScreen2(View v) {
         Intent intObj = new Intent(this, Main22Activity.class);
         startActivity(intObj);
@@ -85,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intObj = new Intent(this, Colculation.class);
         startActivity(intObj);
     }
-
 
 
     @Override

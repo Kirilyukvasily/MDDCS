@@ -51,8 +51,27 @@
         android:clickable="false"
         android:layout_alignWithParentIfMissing="true"
         android:cursorVisible="false"
-        android:layout_above="@+id/progressBar2"
+        android:layout_below="@+id/button8"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="85dp" />
+        android:layout_marginTop="36dp" />
+
+    <Button
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_below="@+id/button9"
+        android:layout_alignLeft="@+id/button9"
+        android:layout_alignStart="@+id/button9"
+        android:layout_marginTop="51dp"
+        android:id="@+id/button10"
+        android:background="@mipmap/ic_pause" />
+
+    <Button
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignTop="@+id/button10"
+        android:layout_alignRight="@+id/button9"
+        android:layout_alignEnd="@+id/button9"
+        android:id="@+id/button11"
+        android:background="@mipmap/ic_stop" />
 
 </RelativeLayout>
