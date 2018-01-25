@@ -16,10 +16,10 @@
         android:layout_height="80dp"
         android:text="Расчет"
         android:id="@+id/button"
-        android:onClick="newScreen3"
+        android:onClick="newScreen4"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        tools:onClick="newScreen3" />
+        tools:onClick="newScreen4" />
 
     <ImageView
         android:layout_width="match_parent"

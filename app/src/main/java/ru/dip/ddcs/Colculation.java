@@ -30,16 +30,10 @@ public class Colculation extends AppCompatActivity {
 
        // new Thread(new SolveThread(this)).start();
 
-    Intent intObj = new Intent(this, Main2Activity.class);
+    Intent intObj = new Intent(this, BDActivity.class);
         startActivity(intObj);
     }
 
-    public void newScreen3(View v) {
-
-
-        Intent intObj = new Intent(this, BDActivity.class);
-        startActivity(intObj);
-    }
 
     public void newScreen4(View v) {
         Intent intObj = new Intent(this, Colculation.class);

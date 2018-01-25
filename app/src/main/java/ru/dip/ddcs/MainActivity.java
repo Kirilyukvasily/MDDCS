@@ -84,10 +84,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intObj = new Intent(this, Main22Activity.class);
         startActivity(intObj);
     }
-    public void newScreen3 (View v) {
-        Intent intObj = new Intent(this, BDActivity.class);
-        startActivity(intObj);
-    }
     public void newScreen4 (View v) {
         Intent intObj = new Intent(this, Colculation.class);
         startActivity(intObj);
