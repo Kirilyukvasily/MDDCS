@@ -1,15 +1,39 @@
 package ru.dip.ddcs;
 
+import android.app.Notification;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.BatteryManager;
+import android.support.v4.app.NotificationManagerCompat;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static ru.dip.ddcs.MainActivity._LowPower;
+import static ru.dip.ddcs.MainActivity._OnlyPower;
+import static ru.dip.ddcs.MainActivity._WiFiIsActive;
+
+
 /**
  * Created by В on 12.03.2016.
  */
-public class GIRwithcDislocProblem {
+public class GIRwithcDislocProblem extends AppCompatActivity {
+
+    private PendingIntent contentIntent;
+    private static final int NOTIFY_ID = 101;
+
+    boolean isCharging;
+    boolean isWifi;
 
     Long aufrufe_awp = new  Long(0);
     Double hk1 = new Double(0);
@@ -145,6 +169,9 @@ public class GIRwithcDislocProblem {
 
     private EditText et;
 
+    Intent m_batteryStatus;
+    ConnectivityManager m_conMan = null;
+    Intent m_batteryIntent = null;
 
     public GIRwithcDislocProblem(int pMinCountCicle,
                           int pCountSubintervals, double pXEnd, int pRastSgatie,
@@ -224,8 +251,10 @@ public class GIRwithcDislocProblem {
 
     public GIRwithcDislocProblem(double pt0,double pE0, double ptau, double pr0, double pPj, double pРs, double pksi, double pv, double palfl, double pbm, double pd,
                double pT, double pτf, double pro, double pG, double pВ, double pkoldis, cSave pSave,
-                                 int pRastSgatie, int pMinCountCicle, int pCountSubintervals, double pxend,EditText editText3)
+                                 int pRastSgatie, int pMinCountCicle, int pCountSubintervals, double pxend,EditText editText3,
+                                 Intent batteryStatus)
     {
+        m_batteryStatus = batteryStatus;
         et=editText3;
         m_minCountCicle = pMinCountCicle;
         m_countSubintervals = pCountSubintervals;
@@ -427,6 +456,8 @@ public class GIRwithcDislocProblem {
             //}
             //Delegate fun = new Delegate(ProbeFunctionPrognoz);
             fehler = awp(xka, xke, n, hilf, epsabs, epsrel, hk1, 6, fmax - aufrufe, aufrufe_awp);
+            if (VerificationSettings() == false)
+                return false;
             if( res_prognoz == false ){
                 h *= 0.5;
                 x = delta_x_for_prognoz;
@@ -498,6 +529,8 @@ public class GIRwithcDislocProblem {
 
             for (int i = 0; i < n; ++i)
                 ykp1[i] = zj[0][i] + zj[1][i] + zj[2][i] + zj[3][i] + zj[4][i];
+            if (VerificationSettings() == false)
+                return true;
             constr = Constraints(x, ykp1);
 
             if (constr == 0) {
@@ -848,8 +881,7 @@ public class GIRwithcDislocProblem {
             int        methode,    /* desired method (3, 6, 7) ...........*/
             long       fmax,       /* maximal # of calls of  dgl() .......*/
             long   aufrufe    /* actual # of calls of  dgl() ........*/
-    )
-    {
+    ) throws IOException {
         double MACH_2 = 1e-15;//100.0 * 1e-30;  /* machine constant related*/
                                                    /* value used for break-off*/
                                                    /* criteria as zero        */
@@ -1077,8 +1109,7 @@ public class GIRwithcDislocProblem {
             double      h,              /* Schrittweite .....................*/
             double[]    y4,             /* DGLS-Loesung 4. Ordnung bei x+h ..*/
             double[]    y5              /* DGLS-Loesung 5. Ordnung bei x+h ..*/
-    )
-    {
+    ) throws IOException {
         int i;                      /* loop variable */
 
         ProbeFunctionPrognoz(x, y, k1);
@@ -1114,8 +1145,7 @@ public class GIRwithcDislocProblem {
                             162.0 * k5[i] + 125.0 * k6[i]);
         }
     }
-    private void ProbeFunctionPrognoz(double pX, double[] pY, double[] pF)
-    {
+    private void ProbeFunctionPrognoz(double pX, double[] pY, double[] pF) throws IOException {
         //int t = 0;
         if (Constraints(pX + delta_x_for_prognoz,pY) == 0)
             Probe(pX + delta_x_for_prognoz, pY, pF);
@@ -1406,7 +1436,9 @@ public class GIRwithcDislocProblem {
     }
 
     public void Insert(double[] y) throws IOException {
-         if (!m_testCalculationComplete)
+
+
+        if (!m_testCalculationComplete)
          {
              if (y[0] > m_epsCalculationComplete)
              {
@@ -1447,7 +1479,43 @@ public class GIRwithcDislocProblem {
     }
 
     //--------------------------------------------------------------
-    public int Constraints(double x, double[] y) {
+
+    public boolean VerificationSettings(){
+
+        if (m_batteryStatus != null) {
+            int status = m_batteryStatus.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+            isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL;
+            if (_OnlyPower && !isCharging) {
+                return false;
+            }
+        }
+
+        if (m_conMan != null) {
+            NetworkInfo netInfo = m_conMan.getActiveNetworkInfo();
+            isWifi = netInfo != null && netInfo.getType() == ConnectivityManager.TYPE_WIFI;
+            if (_WiFiIsActive && !isWifi) {
+                return false;
+            }
+        }
+
+        if (m_batteryStatus != null) {
+            boolean lowStatus = false;
+            int level = m_batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+            int scale = m_batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+            double low = ((float) level / (float) scale) * 100.0f;
+            lowStatus = low < 20;
+            if (!_LowPower && lowStatus) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    //--------------------------------------------------------------
+
+    public int Constraints(double x, double[] y) throws IOException {
+
         if (m_OgranichDim) {
             if (y[1] >= dim && dim != 0) {
                 return 1;
@@ -1627,8 +1695,10 @@ public class GIRwithcDislocProblem {
 
        //et.setText("dgdh");
 
+       /* ProgressBar pb= (ProgressBar)findViewById(R.id.progressBar2);
+        pb.setProgress(50);*/
         boolean rez = SolveGIR();
-
+// отдельный файл на сервер
         if (rez == false) {
             return rez;
         }
@@ -1938,4 +2008,13 @@ public class GIRwithcDislocProblem {
         }
         f[1] = ct / SvIv;
     }
+
+    public void SetConMan(ConnectivityManager conMan){
+        m_conMan = conMan;
+    }
+    public void SetBatteryIntent(Intent batteryIntent){
+        m_batteryIntent = batteryIntent;
+    }
+
+
 }

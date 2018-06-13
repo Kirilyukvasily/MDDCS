@@ -149,7 +149,7 @@ public class Main2Activity extends ActionBarActivity {
 
                 save.CreateZona(1,parametersZona);
                 GIRwithcDislocProblem method = new GIRwithcDislocProblem(t0, E0, U, r0, Pj, Рs, ξ, v, α, bÅ, d, T, τf, ro, G,
-                        В, koldis, save, 1, 1, 50, 0.009, (EditText) findViewById(R.id.editText3));
+                        В, koldis, save, 1, 1, 50, 0.009, (EditText) findViewById(R.id.editText3), null);
 
                 method.SetTN(0.009);
                 method.SetTOL(0.00000000001);
@@ -463,7 +463,7 @@ public class Main2Activity extends ActionBarActivity {
 
         builder.setContentIntent(contentIntent)
                 .setSmallIcon(R.drawable.abc_btn_check_material)
-                .setContentTitle("MDDCS")
+                .setContentTitle("MDDCS GRID")
                 .setContentText("Расчет закончен!"); // Текст уведомления
 
         Notification notification = null;

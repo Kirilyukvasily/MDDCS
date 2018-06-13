@@ -70,7 +70,7 @@ public class Compact extends AppCompatActivity  {
         IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
         Intent batteryStatus = getApplicationContext().registerReceiver(null, ifilter);
         int status =  batteryStatus.getIntExtra(BatteryManager.EXTRA_STATUS, -1);;
-        isCharging= status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL;
+        isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL;
 
 
         boolean lowStatus = false;
@@ -87,7 +87,7 @@ public class Compact extends AppCompatActivity  {
 
         if (_OnlyPower && !isCharging) {
             AlertDialog.Builder builder = new AlertDialog.Builder(Compact.this);
-            builder.setTitle("Подключите зарядку")
+            builder.setTitle("Подключите зарядное устройство")
                     .setCancelable(false)
                     .setNegativeButton("ОК",
                             new DialogInterface.OnClickListener() {
@@ -141,6 +141,13 @@ public class Compact extends AppCompatActivity  {
 
     private void Run() throws IOException {
 
+        IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+        Intent batteryStatus = getApplicationContext().registerReceiver(null, ifilter);
+
+        ConnectivityManager conMan = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        Intent batteryIntent = registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+
         ProgressBar pb = (ProgressBar)findViewById(R.id.progressBar2);
         int maxZonaId = 2;
         int maxSeriiId = 5;
@@ -191,7 +198,10 @@ public class Compact extends AppCompatActivity  {
 
         save.CreateZona(1,parametersZona);
         GIRwithcDislocProblem method = new GIRwithcDislocProblem(t0, E0, U, r0, Pj, Рs, ξ, v, α, bÅ, d, T, τf, ro, G,
-                В, koldis, save, 1, 1, 50, 0.009, (EditText) findViewById(R.id.editText3));
+                В, koldis, save, 1, 1, 50, 0.009, (EditText) findViewById(R.id.editText3), batteryStatus);
+
+        method.SetConMan(conMan);
+        method.SetBatteryIntent(batteryIntent);
 
         method.SetTN(0.009);
         method.SetTOL(0.00000000001);
@@ -316,7 +326,7 @@ public class Compact extends AppCompatActivity  {
 
         builder.setContentIntent(contentIntent)
                 .setSmallIcon(R.drawable.abc_btn_check_material)
-                .setContentTitle("MDDCS")
+                .setContentTitle("MDDCS GRID")
                 .setContentText("Расчет закончен!"); // Текст уведомления
 
         Notification notification = null;
