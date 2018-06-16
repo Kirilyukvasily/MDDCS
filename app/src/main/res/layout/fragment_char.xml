@@ -107,7 +107,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="ro,м2"
+        android:text="ro,м-2"
         android:id="@+id/textView22"
         android:layout_below="@+id/textView11"
         android:layout_alignLeft="@+id/textView11"
@@ -296,6 +296,17 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:text="ro,м-2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/textView23"
+            android:layout_alignLeft="@+id/editText18"
+            android:layout_alignStart="@+id/editText18"
+            android:layout_marginLeft="27dp"
+            android:layout_marginStart="27dp"
+            android:id="@+id/textView30" />
 
 
     </RelativeLayout>
